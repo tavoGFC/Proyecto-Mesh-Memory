@@ -63,14 +63,20 @@ void SinglyLinkedList::deleteData(string nodeValue){	//deletes the first node th
 			}
 		}
 	}
+
+	if(flagDeleated==false){
+			cout<<"ERROR";
+			cout<< nodeValue;
+			cout<< "-1" <<endl;
+			return;
+		}
+
 	while(temp!=NULL){
 		temp->posc--;
 		temp=temp->next;
 	}
 	len--;
-	if(flagDeleated==false){
-		cout<<"ERROR" << endl;
-	}
+
 }
 
 void SinglyLinkedList::printList() {

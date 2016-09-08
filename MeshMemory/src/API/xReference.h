@@ -8,11 +8,23 @@
 #ifndef XREFERENCE_H_
 #define XREFERENCE_H_
 
+#include <iostream>
+using namespace std;
+
 class xReference {
 
-	public:
-		xReference();
-		virtual ~xReference();
+private:
+	int id;
+	int size;
+	string type;
+
+public:
+
+
+	xReference();
+	virtual ~xReference();
+
+
 };
 
 #endif /* XREFERENCE_H_ */
