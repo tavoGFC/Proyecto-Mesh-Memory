@@ -7,8 +7,8 @@
 //============================================================================
 
 #include <iostream>
-#include "SinglyLinkedList.h"
-#include "DoublyLinkedList.h"
+#include "Structures/SinglyLinkedList.h"
+#include "Structures/DoublyLinkedList.h"
 
 using namespace std;
 //BASE64 Funciones//
@@ -132,15 +132,28 @@ Pareja& operator +(const Pareja &p1,const Pareja &p2){
 
 int main() {
 
-    Pareja A(50, 75 );
-    Pareja B(150, 175 );
-    Pareja C = A + B;
+    //Pareja A(50, 75 );
+    //Pareja B(150, 175 );
+    //Pareja C = A + B;
 
-    cout << "A = " << A.a << ',' << A.b << "\n";
-    cout << "B = " << B.a << ',' << B.b << "\n";
-    cout << "C = " << C.a << ',' << C.b << "\n";
+    //cout << "A = " << A.a << ',' << A.b << "\n";
+    //cout << "B = " << B.a << ',' << B.b << "\n";
+    //cout << "C = " << C.a << ',' << C.b << "\n";
 
+	cout << "Hello World!" << endl;
+	enum paises {entero=4, peru, india, islandia, oman};
+	string pais;
+	pais = oman;
+	int sizePais = sizeof(pais);
+	cout << sizePais << endl;
+	if (sizePais == entero){
+		cout << "wlololcao" << endl;
+		return true;
+	}else{
+		return false;
+	}
 
+	cout << pais << endl;
 
 
 //-----------------------------------------------------------------------------------------------------------------------
