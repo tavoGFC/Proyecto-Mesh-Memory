@@ -23,13 +23,22 @@ template <typename T>
      return ss.str();
   }
 
+char generateID(){
+	//char ID[];
+
+}
+
 
 int main() {
 	cout << "Hola Saturno!" << endl;
 
-	long a = 9098;
-	cout<< "a: " << a << endl;
-	string s = NumberToString(a);
+	clock_t start = clock();
+	cout << "time: "<< start  << endl;
+	int timeInt = start;
+	cout << "timeInt: "<< timeInt  << endl;
+
+	//long a = 9098;
+	string s = NumberToString(timeInt);
 	cout<< "s: " << s << endl;
 
 
