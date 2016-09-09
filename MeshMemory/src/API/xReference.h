@@ -11,6 +11,7 @@
 #include <iostream>
 using namespace std;
 
+
 class xReference {
 
 private:
@@ -19,7 +20,6 @@ private:
 	string type;
 
 public:
-
 
 	xReference();
 	virtual ~xReference();
