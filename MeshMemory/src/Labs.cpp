@@ -41,7 +41,7 @@ int main() {
     //cout << "B = " << B.a << ',' << B.b << "\n";
     //cout << "C = " << C.a << ',' << C.b << "\n";
 
-	cout << "Hola Mundo de parte de mi!" << endl;
+	cout << "Hola Saturno!" << endl;
 
 //-----------------------------------------------------------------------------------------------------------------------
 	//cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
