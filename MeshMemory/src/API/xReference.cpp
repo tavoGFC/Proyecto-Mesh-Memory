@@ -20,9 +20,9 @@ xReference::~xReference() {
 }
 
 
-/*bool xReference::operator ==(const xReference& xRef1, const xReference& xRef2){
+bool xReference::operator ==(xReference xRef2){
 	bool boolResult;
-	if(xRef1.id == xRef2.id && xRef1.size == xRef2.size ){
+	if(this->id == xRef2.id){
 		boolResult = true;
 	}else{
 		boolResult = false;
@@ -30,8 +30,12 @@ xReference::~xReference() {
 	return boolResult;
 }
 
-Pareja& operator +(const Pareja &p1,const Pareja &p2)
-{
-  return *(new Pareja(p1.a + p2.a, p1.b + p2.b) );
+bool xReference::operator !=(xReference xRef2){
+	bool boolResult;
+	if(this->id != xRef2.id){
+		boolResult = true;
+	}else{
+		boolResult = false;
+	}
+	return boolResult;
 }
-*/

@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <sstream>
 #include "FolderMML/Token.h"
+#include "FolderMML/xReference.h"
 
 using namespace std;
 
@@ -77,26 +78,19 @@ string generateID() {
 
 int main() {
 
-	cout << "Hola Saturno!" << endl;
-	string idid = generateID();
-	cout << "Hola Jupiter!" << endl;
-	cout << "idid: " << idid << endl;
+	string ID = generateID();
+	cout << "ID: " << ID << endl;
 
-/*
-	clock_t start = clock();
-	cout << "time: "<< start  << endl;
-	int timeInt = start;
-	cout << "timeInt: "<< timeInt  << endl;
-	string s = NumberToString(timeInt);
-	cout<< "s: " << s << endl;
 	Token token1;
+	string s = "Hello Neptune!";
+	cout << "To encoded: " << s << endl;
 	token1.setString(s);
 	string stringEncoded;
-	stringEncoded = token1.base64_encode(reinterpret_cast<const unsigned char*>(s.c_str()), s.length());
+	stringEncoded = token1.encode(token1.getString());
 	string stringDecoded;
-	stringDecoded = token1.base64_decode(stringEncoded);
+	stringDecoded = token1.decode(stringEncoded);
 	cout << "encoded: " << stringEncoded << endl;
 	cout << "decoded: " << stringDecoded << endl;
 	return 0;
-*/
+
 }
