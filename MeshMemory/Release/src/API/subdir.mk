@@ -4,23 +4,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/API/DoublyLinkedList.cpp \
+../src/API/HelloWorld.cpp \
 ../src/API/MeshMemAPI.cpp \
-../src/API/SinglyLinkedList.cpp \
 ../src/API/Token.cpp \
 ../src/API/xReference.cpp 
 
 OBJS += \
-./src/API/DoublyLinkedList.o \
+./src/API/HelloWorld.o \
 ./src/API/MeshMemAPI.o \
-./src/API/SinglyLinkedList.o \
 ./src/API/Token.o \
 ./src/API/xReference.o 
 
 CPP_DEPS += \
-./src/API/DoublyLinkedList.d \
+./src/API/HelloWorld.d \
 ./src/API/MeshMemAPI.d \
-./src/API/SinglyLinkedList.d \
 ./src/API/Token.d \
 ./src/API/xReference.d 
 
