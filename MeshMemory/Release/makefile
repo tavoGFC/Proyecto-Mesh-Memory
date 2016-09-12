@@ -9,6 +9,7 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/Structures/subdir.mk
+-include src/Client-Server/subdir.mk
 -include src/API/subdir.mk
 -include src/subdir.mk
 -include subdir.mk
