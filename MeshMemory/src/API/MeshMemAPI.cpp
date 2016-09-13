@@ -7,3 +7,10 @@
 
 #include "MeshMemAPI.h"
 
+MeshMemAPI::MeshMemAPI(){
+	if(API == NULL){
+		return MeshMemAPI API;
+	}else{
+
+	}
+}
