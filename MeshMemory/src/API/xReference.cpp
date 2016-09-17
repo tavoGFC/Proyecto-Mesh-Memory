@@ -14,11 +14,19 @@
 
 
 /**
- * Constructor for an xReference object.
+ * Constructor for an xReference object. Initializes some attributes
  */
 xReference::xReference() {
 	this->id = this->generateID();
-	this->size = 0;
+	this->size = sizeof(data);
+}
+/**
+ * Constructor for an xReference object. Needs a data
+ */
+xReference::xReference(string data) {
+	this->id = this->generateID();
+	this->data=data;
+	this->size = sizeof(data);
 }
 
 /**
@@ -34,6 +42,14 @@ xReference::~xReference() {
 string xReference::getID(){
 	return id;
 }
+
+/**
+ * Returns the data of an xReference object.
+ */
+string xReference::getData(){
+	return data;
+}
+
 
 /**
  * Returns the size for an xReference object.

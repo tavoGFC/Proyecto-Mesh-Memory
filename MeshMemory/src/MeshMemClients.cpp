@@ -13,6 +13,7 @@
 #include <string>
 #include "API/MeshMemAPI.h"
 #include "API/SocketCtoJ.h"
+#include "API/xReference.h"
 
 using namespace std;
 
@@ -34,10 +35,12 @@ int main() {
 
 
 		if (socket.conectar(hostIP, portN) != -1){
+			cout <<"Successfully connected"<<endl;
 			break;
 		}
-		cout<<"ERROR: please try again!!"<<endl;
+		cout<<"ERROR: please try connecting again!!"<<endl;
 	}
+
 
 	cout << "==============================================================================="<<endl;
 
@@ -56,7 +59,7 @@ int main() {
 
 
 	string entry;
-
+	xReference ref1;
 
 	while(true){
 		cout << "Type your choice: " << endl;
@@ -69,7 +72,10 @@ int main() {
 		else if(entry == "1"){
 			cout << "You have enter option (1): xMalloc(int size, xType type, void* value)." << endl;
 			cout << "Please enter the parameters size (int) and type (xType)." << endl;
-			socket.sendMessage("quiero usar el mallock pls!!");
+			cin>>entry;
+			ref1= xReference(entry);
+			socket.sendMessage(ref1.getData());
+
 
 		}
 		else if(entry == "2"){

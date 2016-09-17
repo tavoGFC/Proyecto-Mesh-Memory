@@ -21,12 +21,13 @@ class xReference {
 private:
 	string id; //ID that identifies each xRefe created.
 	int size; // Integer that show only the byte size of the data.
-
+	string data;
 public:
-
 	xReference();
+	xReference(string data);
 	virtual ~xReference();
 	string getID();
+	string getData();
 	void setSize(int size);
 	int getSize();
 	xReference& operator *();
