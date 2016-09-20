@@ -1,10 +1,7 @@
-
 //============================================================================
-// Name        : consola.cpp
+// Name        : MeshMemClient.cpp
 // Author      : randy, ricardo y gustavo
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Version     : 1.0
 //============================================================================
 
 #include <iostream>
@@ -18,70 +15,81 @@
 using namespace std;
 
 int main() {
-	cout << "Welcome to the Mesh Memory, brave warrior!" << endl; // prints !!!Hello World!!!
+	cout << "Welcome to the Mesh Memory!" << endl;
 	cout << "To access the API please connect to a MeshMemory Manager.";
-	cout << "Enter a valid IP address and the Port Number of the device."<<endl;
+	cout << "Enter a valid IP address and the Port Number of the device to make a connection."<<endl;
 
 	int portN;
 	string hostIP;
-
 	SocketCtoJ socket;
 	while(true){
 		cout << "Entry Host: "<<endl;
 		cin >> hostIP;
 		cout << "Entry Port: "<<endl;
 		cin >> portN;
-		//int port = portN;
-
-
-		if (socket.conectar(hostIP, portN) != -1){
-			cout <<"Successfully connected"<<endl;
+		if (socket.startConnection(hostIP, portN) != -1){
+			cout <<"Successfully connected!"<<endl;
 			break;
 		}
 		cout<<"ERROR: please try connecting again!!"<<endl;
 	}
+	string menu =  "===============================================================================\n"
+				   "These are the functions to use in this menu.\n"
+				   "________________________________________________________________________________\n"
+
+				   "To use these functions type the number of the function you want to use.\n"
+			       "(0). To EXIT.\n"
+				   "(1). xMalloc(int size, xType type)\n"
+				   "(2). xMalloc(int size, xType type, void* value)\n"
+				   "(3). xAssign(xReference reference, void* value)\n"
+	               "(4). xFree(xReference toFree)\n"
+	               "===============================================================================\n";
+	cout << menu << endl;
+
+	string entryOption;
+	int entrySize;
+	string entryData;
 
 
-	cout << "==============================================================================="<<endl;
-
-	cout << "These are the functions to use in this menu." << endl;
-
-	cout << "________________________________________________________________________________"<<endl;
-
-	cout << "To use these functions type the number of the function you want to use." << endl;
-	cout << "(1). xMalloc(int size, xType type)" << endl;
-	cout << "(2). xMalloc(int size, xType type, void* value)" << endl;
-	cout << "(3). xAssign(xReference reference, void* value)" << endl;
-	cout << "(4). xFree(xReference toFree)" << endl;
-	cout << "(0). To EXIT" << endl;
-
-	cout << "==============================================================================="<<endl;
-
-
-	string entry;
 	xReference ref1;
-
 	while(true){
 		cout << "Type your choice: " << endl;
-		cin >> entry;
+		cin >> entryOption;
 
-		if(entry == "0" ){
+		if(entryOption == "0" ){
 			cout << "Exit." << endl;
 			break;
 		}
-		else if(entry == "1"){
-			cout << "You have enter option (1): xMalloc(int size, xType type, void* value)." << endl;
+		else if(entryOption == "1"){
+			cout << "You have enter option (1): xMalloc(int size, xType type)." << endl;
 			cout << "Please enter the parameters size (int) and type (xType)." << endl;
-			cin>>entry;
-			ref1= xReference(entry);
-			socket.sendMessage(ref1.getData());
+			//cout << "Entry Size: "<<endl;
+			//cin>>entry2;
+			cout << "Entry type: "<<endl;
+			cin>>entryData;
 
+			ref1= xReference(entryData);
+			//socket.sendMsj(ref1.getData());
+
+			int aux;
+			int longitud;
+			socket.receiveMsj((char*) &aux, sizeof(int));
+			longitud = ntohl(aux);
+			socket.receiveMsj(socket.buffer,longitud);
+
+			printf("Message of the MeshMem Manager: %s\n", socket.buffer);
+
+			cout << "Try another number if want to make another action." << endl;
+			cin>>entryOption;
 
 		}
-		else if(entry == "2"){
+		else if(entryOption == "2"){
+			cout << "You have enter option (2): xMalloc(int size, xType type, void* value)." << endl;
+			cout << "Please enter the parameters size (int), type (xType) and value (void*)." << endl;
+			cout << "Entry: "<<endl;
 
 		}
-		else if(entry == "3" ){
+		else if(entryOption == "3" ){
 			cout << "You have enter option (3): xAssign(xReference reference, void* value) " << endl;
 			cout << "Please enter the parameters reference (int) and value (void*)." << endl;
 
@@ -91,10 +99,8 @@ int main() {
 			cin >> value;
 
 			cout << value <<endl;
-
-			//llamado de la funcion xAssign()
 		}
-		else if(entry == "4" ){
+		else if(entryOption == "4" ){
 
 		}
 		else{

@@ -13,21 +13,22 @@ using namespace std;
 
 
 /**
- * Creates an object xReference.
- *
+ * Creates an object xReference. That stands as a references
+ * for a memory piece that is in the mesh network. It has an
+ * id for it's identification and the size that is wanted to
+ * be saved.
  */
 class xReference {
 
 private:
-	string id; //ID that identifies each xRefe created.
-	int size; // Integer that show only the byte size of the data.
-	string data;
+	string id;
+	int size;
+
 public:
 	xReference();
-	xReference(string data);
+	xReference(int size);
 	virtual ~xReference();
-	string getID();
-	string getData();
+	string getID();;
 	void setSize(int size);
 	int getSize();
 	xReference& operator *();
@@ -36,7 +37,6 @@ public:
 	//void operator =();
 	string generateID();
 	string generateID_Aux(unsigned char const* bytes_to_encode, unsigned int in_len);
-
 	template <typename T>
 	string NumberToString ( T Number );
 

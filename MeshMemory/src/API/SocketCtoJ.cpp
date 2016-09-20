@@ -2,39 +2,42 @@
  * SocketCtoJ.cpp
  *
  *  Created on: Sep 16, 2016
- *      Author: ricardo
+ *  Author: ricardo, randy, gustavo
  */
 
 #include "SocketCtoJ.h"
 
-
+/**
+ * Constructor
+ */
 SocketCtoJ::SocketCtoJ() {
 	MAXDATASIZE=1024;
+	this->descriptor = descriptor;
 }
 
-int SocketCtoJ::conectar(string hostIP, int port) {
+
+/**
+ * Destroyer
+ */
+SocketCtoJ::~SocketCtoJ() {
+}
+
+/**
+ *
+ * Connects the Client-C++(Mesh Mem Client)to the
+ * Server-Java (MeshMem Manager).
+ *
+ * Returns 1 when successful, -1 when unsuccessful.
+ *
+ * @params string hostIP, int port
+ */
+int SocketCtoJ::startConnection(string hostIP, int port) {
 	MAXDATASIZE=1024;
-
-	const char * host = hostIP.c_str(); /*Convert the string to a char* */
-
-	//int result = 1;
-
-//	//nuevas pruebas
-//	char buffer[MAXDATASIZE];
-	//host del servidor
-	//char *host = "192.168.1.5";
-	/*fichero descriptor*/
-	//int descriptor;
-	/*recibe informacion sobre el nodo remoto*/
+	const char * host = hostIP.c_str();
 	struct hostent *hostC;
-	/*informacion sobre la direccion del servidor*/
 	struct sockaddr_in server;
-
-
-
 	if ((hostC = gethostbyname(host)) == NULL){
 		printf("gethostbyname() error\n");
-		//result = -1;
 		return -1;
 	}
 
@@ -42,48 +45,77 @@ int SocketCtoJ::conectar(string hostIP, int port) {
 		printf("socket() error\n");
 		return -1;
 	}
-
 	server.sin_family = AF_INET;
 	server.sin_port = htons(port);
-	//pasa la informacion de *hostC a h_addr
 	server.sin_addr = *((struct in_addr *)hostC->h_addr);
 	bzero(&(server.sin_zero), 8);
-
 	if (connect(descriptor, (struct sockaddr *)&server, sizeof(struct sockaddr))  == -1){
 		printf("connect() error\n");
-		//result = -1;
 		return -1;
 	}
 	return 1;
 }
 
-void SocketCtoJ::sendMessage(string mensaje){
-	mensaje+=" \n";
-	const char * mensajeChar = mensaje.c_str(); /*Convert the string to a char* */
+/**
+ * Receives a message from the Server-Java (MeshMem Manager)
+ *for print it into the  Client-C (MeshMem Client)'s screen.
+ *
+ *Returns a int on whether the was receive or not.
+ *
+ *@params, char* buffer, int longitudMensaje
+ */
+int SocketCtoJ::receiveMsj(char* buffer, int longitudMensaje){
+	int Leido = 0;
+	int Aux = 0;
+	if ((descriptor == -1) || (buffer == NULL) || (longitudMensaje < 1))
+		return -1;
+	while (Leido < longitudMensaje){
+		Aux = read (descriptor, buffer , longitudMensaje - Leido);
+		if (Aux > 0){
+			Leido = Leido + Aux;
+		}
+		else{
+			if (Aux == 0)
+				return Leido;
+			if (Aux == -1){
+				switch (errno){
+					case EINTR:
+					case EAGAIN:
+						usleep (100);
+						break;
+					default:
+						return -1;
+				}
+			}
+		}
+	}
+	return Leido;
+}
 
-	//permite recibir n cantidad de mensajes, escritos desde consola
-	//printf("Please enter the message: ");
+
+
+/**
+ * Sends a message from the  Client-C++ (MeshMem Client)
+ * to the Server-Java (MeshMem Manager).
+ *
+ * @params string mensaje
+ */
+void SocketCtoJ::sendMsj(string mensaje){
+	mensaje+=" \n";
+	const char * mensajeChar = mensaje.c_str();
 	bzero(buffer, MAXDATASIZE);
-	//fgets(buffer, MAXDATASIZE-1, stdin);
-	//char str1[]= mensajeChar ;
 	strncpy(buffer, mensajeChar, sizeof(buffer));
 	int n;
 	n = write(descriptor, buffer, strlen(buffer));
 	if (n < 0){
 		printf("Error write()\n");
-		//break;
-		//result = -1;
-		//return -1;
 	}
 	bzero(buffer, MAXDATASIZE);
 	n = read(descriptor, buffer, MAXDATASIZE-1);
 	if (n < 0){
 		printf("error read()\n");
-		//return -1;
 	}
 }
 
-SocketCtoJ::~SocketCtoJ() {
-	// TODO Auto-generated destructor stub
-}
+
 

@@ -14,27 +14,19 @@
 
 
 /**
- * Constructor for an xReference object. Initializes some attributes
+ * Constructor for an xReference object. Initializes some attributes.
+ *
  */
-xReference::xReference() {
-	this->id = this->generateID();
-	this->size = sizeof(data);
+xReference::xReference(int size) {
+	this->size = size;
 }
-/**
- * Constructor for an xReference object. Needs a data
- */
-xReference::xReference(string data) {
-	this->id = this->generateID();
-	this->data=data;
-	this->size = sizeof(data);
-}
+
 
 /**
  * Destructor for an xReference object.
  */
 xReference::~xReference() {
 }
-
 
 /**
  * Returns the id for an xReference object.
@@ -43,16 +35,10 @@ string xReference::getID(){
 	return id;
 }
 
-/**
- * Returns the data of an xReference object.
- */
-string xReference::getData(){
-	return data;
-}
-
 
 /**
  * Returns the size for an xReference object.
+ *
  * @param int size
  */
 void xReference::setSize(int size){
@@ -68,6 +54,7 @@ int xReference::getSize(){
 
 /**
  * Compares two xReference, if equal returns true, else false.
+ *
  * @param xReference xRef2
  */
 bool xReference::operator ==(xReference xRef2){
@@ -83,6 +70,7 @@ bool xReference::operator ==(xReference xRef2){
 
 /**
  * Compares two xReference, if not equal returns true, else false.
+ *
  * @param xReference xRef2
  */
 bool xReference::operator !=(xReference xRef2){
@@ -97,6 +85,7 @@ bool xReference::operator !=(xReference xRef2){
 
 /**
  * Converts an number (int) into a string.
+ *
  * @param <T> number
  */
 template <typename T>

@@ -11,7 +11,15 @@
 #include "xReference.h"
 #include "Token.h"
 
-int startConnection(string hostIP, int port);
+/**
+ * MeshMem API is an .h source file that contains the firm
+ * and prototype of the functions that made up the API.
+ *
+ * All functions are available to use when the connection
+ * between the Server-Java (MeshMem Manager) and the Client-
+ * C++ (MeshMem Client) is set up.
+ */
+
 xReference xMalloc(int size, void* type);
 xReference xMalloc(int size, void* type, void* value);
 void xAssign(xReference reference, void* value);
