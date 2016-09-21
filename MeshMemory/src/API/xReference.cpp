@@ -12,13 +12,21 @@
 #include <stdlib.h>
 #include <sstream>
 
+/**
+ * Constructor for an xReference object.
+ *
+ */
+xReference::xReference() {
+}
 
 /**
  * Constructor for an xReference object. Initializes some attributes.
  *
  */
-xReference::xReference(int size) {
+xReference::xReference(int size, string type) {
 	this->size = size;
+	this->type=type;
+	this->id= this->generateID();
 }
 
 
@@ -35,6 +43,12 @@ string xReference::getID(){
 	return id;
 }
 
+/**
+ * Returns the type for an xReference object.
+ */
+string xReference::getType(){
+	return type;
+}
 
 /**
  * Returns the size for an xReference object.

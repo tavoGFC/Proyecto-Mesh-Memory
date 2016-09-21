@@ -9,21 +9,24 @@
 #define MESHMEMAPI_H_
 
 #include "xReference.h"
-#include "Token.h"
+#include "SocketCtoJ.h"
 
-/**
- * MeshMem API is an .h source file that contains the firm
- * and prototype of the functions that made up the API.
- *
- * All functions are available to use when the connection
- * between the Server-Java (MeshMem Manager) and the Client-
- * C++ (MeshMem Client) is set up.
- */
+using namespace std;
 
-xReference xMalloc(int size, void* type);
-xReference xMalloc(int size, void* type, void* value);
-void xAssign(xReference reference, void* value);
-void xFree(xReference toFree);
+class MeshMemAPI{
+private:
+	SocketCtoJ mySocket;
+public:
+	MeshMemAPI();
+	virtual ~MeshMemAPI();
+	SocketCtoJ getSocket();
+	xReference xMalloc(int size, string type);
+	xReference xMalloc(int size, string type, void* value);
+	void xAssign(xReference reference, void* value);
+	void xFree(xReference toFree);
 
+	bool verifyType(string type);
+
+};
 
 #endif /* MESHMEMAPI_H_ */

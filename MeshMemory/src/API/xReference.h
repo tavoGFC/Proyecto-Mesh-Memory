@@ -23,24 +23,30 @@ class xReference {
 private:
 	string id;
 	int size;
+	string type;
 
 public:
 	xReference();
-	xReference(int size);
+	xReference(int size, string type);
 	virtual ~xReference();
+
 	string getID();;
 	void setSize(int size);
 	int getSize();
+	string getType();
+
 	xReference& operator *();
 	bool operator ==(xReference xRef2);
 	bool operator !=(xReference xRef2);
 	//void operator =();
+
 	string generateID();
 	string generateID_Aux(unsigned char const* bytes_to_encode, unsigned int in_len);
+
 	template <typename T>
 	string NumberToString ( T Number );
 
-	 string base64_chars =
+	string base64_chars =
 				             "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 				             "abcdefghijklmnopqrstuvwxyz"
 				             "0123456789+/";

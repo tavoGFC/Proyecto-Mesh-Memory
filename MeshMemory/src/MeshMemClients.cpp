@@ -9,30 +9,37 @@
 #include <cstring>
 #include <string>
 #include "API/MeshMemAPI.h"
-#include "API/SocketCtoJ.h"
+//#include "API/SocketCtoJ.h"
 #include "API/xReference.h"
+#include "Structures/xRefSingleList.h"
+
 
 using namespace std;
 
 int main() {
+	MeshMemAPI myAPI;
+	SocketCtoJ mySocket=myAPI.getSocket();
+	int portN;
+	string hostIP;
+	xRefSingleList refList;
+
 	cout << "Welcome to the Mesh Memory!" << endl;
 	cout << "To access the API please connect to a MeshMemory Manager.";
 	cout << "Enter a valid IP address and the Port Number of the device to make a connection."<<endl;
 
-	int portN;
-	string hostIP;
-	SocketCtoJ socket;
 	while(true){
 		cout << "Entry Host: "<<endl;
 		cin >> hostIP;
 		cout << "Entry Port: "<<endl;
 		cin >> portN;
-		if (socket.startConnection(hostIP, portN) != -1){
+		if (myAPI.getSocket().startConnection(hostIP, portN) != -1){
 			cout <<"Successfully connected!"<<endl;
 			break;
 		}
 		cout<<"ERROR: please try connecting again!!"<<endl;
 	}
+
+
 	string menu =  "===============================================================================\n"
 				   "These are the functions to use in this menu.\n"
 				   "________________________________________________________________________________\n"
@@ -47,11 +54,10 @@ int main() {
 	cout << menu << endl;
 
 	string entryOption;
+
 	int entrySize;
-	string entryData;
+	string entryType;
 
-
-	xReference ref1;
 	while(true){
 		cout << "Type your choice: " << endl;
 		cin >> entryOption;
@@ -60,35 +66,45 @@ int main() {
 			cout << "Exit." << endl;
 			break;
 		}
+		//----------------------------------------xMALLOC------------------------------------
 		else if(entryOption == "1"){
-			cout << "You have enter option (1): xMalloc(int size, xType type)." << endl;
+			cout << "You have enter option (1): xMalloc(int size, string type)." << endl;
 			cout << "Please enter the parameters size (int) and type (xType)." << endl;
-			//cout << "Entry Size: "<<endl;
-			//cin>>entry2;
+
+			cout << "Entry Size: "<<endl;
+			cin>>entrySize;
 			cout << "Entry type: "<<endl;
-			cin>>entryData;
+			cin>>entryType;
 
-			ref1= xReference(entryData);
-			//socket.sendMsj(ref1.getData());
+			if (myAPI.verifyType(entryType)){
 
-			int aux;
-			int longitud;
-			socket.receiveMsj((char*) &aux, sizeof(int));
-			longitud = ntohl(aux);
-			socket.receiveMsj(socket.buffer,longitud);
+			xReference ref1 = myAPI.xMalloc(entrySize, entryType);
+			refList.insertData(ref1);
+			refList.printList();
+			}
+			else{
+				cout <<"ERROR, type is not in our parameters."<<endl;
+			}
 
-			printf("Message of the MeshMem Manager: %s\n", socket.buffer);
+//			int aux;
+//			int longitud;
+//			socket.receiveMsj((char*) &aux, sizeof(int));
+//			longitud = ntohl(aux);
+//			socket.receiveMsj(socket.buffer,longitud);
+//
+//			printf("Message of the MeshMem Manager: %s\n", socket.buffer);
 
 			cout << "Try another number if want to make another action." << endl;
-			cin>>entryOption;
 
 		}
+		//----------------------------------------xMALLOC------------------------------------
 		else if(entryOption == "2"){
 			cout << "You have enter option (2): xMalloc(int size, xType type, void* value)." << endl;
 			cout << "Please enter the parameters size (int), type (xType) and value (void*)." << endl;
 			cout << "Entry: "<<endl;
 
 		}
+		//----------------------------------------xASSIGN------------------------------------
 		else if(entryOption == "3" ){
 			cout << "You have enter option (3): xAssign(xReference reference, void* value) " << endl;
 			cout << "Please enter the parameters reference (int) and value (void*)." << endl;
@@ -100,9 +116,12 @@ int main() {
 
 			cout << value <<endl;
 		}
+		//----------------------------------------xFREE------------------------------------
 		else if(entryOption == "4" ){
 
 		}
+
+		//----------------------------------------ERROR------------------------------------
 		else{
 			cout << "Your entry does not match our functions.";
 		}

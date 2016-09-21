@@ -1,23 +1,24 @@
 /*
- * SinglyLinkedList.cpp
+ * xRefSingleList.cpp
  *
- *  Created on: Sep 5, 2016
- *      Author: randy
+ *  Created on: Sep 20, 2016
+ *      Author: ricardo
  */
 
-#include "SinglyLinkedList.h"
+#include "xRefSingleList.h"
 
 
-SinglyLinkedList::SinglyLinkedList() {
+xRefSingleList::xRefSingleList() {
 	len=0;
 	head=NULL;
-}
-
-SinglyLinkedList::~SinglyLinkedList(){
 
 }
 
-void SinglyLinkedList::insertData(string newValue) {	//adds a new node with the given value
+xRefSingleList::~xRefSingleList() {
+	// TODO Auto-generated destructor stub
+}
+
+void xRefSingleList::insertData(xReference newValue) {	//adds a new node with the given value
 	Node* newNode= new Node();
 	newNode->value=newValue;
 
@@ -37,7 +38,7 @@ void SinglyLinkedList::insertData(string newValue) {	//adds a new node with the 
 	}
 }
 
-void SinglyLinkedList::deleteData(string nodeValue){	//deletes the first node that is found with the given value
+void xRefSingleList::deleteData(xReference nodeValue){	//deletes the first node that is found with the given value
 	if (head==NULL){	//first case: Empty list
 		cout << "ERROR"<<endl;
 		return;
@@ -66,7 +67,7 @@ void SinglyLinkedList::deleteData(string nodeValue){	//deletes the first node th
 
 	if(flagDeleated==false){
 			cout<<"ERROR";
-			cout<< nodeValue;
+			cout<< nodeValue.getID();
 			cout<< "-1" <<endl;
 			return;
 		}
@@ -79,40 +80,45 @@ void SinglyLinkedList::deleteData(string nodeValue){	//deletes the first node th
 
 }
 
-void SinglyLinkedList::printList() {
+void xRefSingleList::printList() {
     Node *temp = head;
     while(temp!=NULL){
-        cout<<temp->value;		//print the value
+    	ostringstream ss;
+    	ss << temp->value.getSize();
+    	string size= ss.str();
+
+    	string info=(temp->value.getID() + size + temp->value.getType()+ " -> ");
+        //cout<<temp->value;		//print the value
         cout << " [";
         cout << (temp->posc) ;	//print the position
         cout << "] -> " ;
+
         temp=temp->next;
     }
     cout<<endl;
 }
 
-string SinglyLinkedList::getDataX(int x){
-	if (head==NULL){
-			cout << "ERROR" <<endl;
-			//return false;
-	}
-	if (x >= len or x<0){
-		cout << "Error"<< endl;
-		return false;
-	}else{
-		Node *temp=head;
-		string nodeValue;
-		while(temp!=NULL){
-			if (temp->posc == x){
-				nodeValue = temp->value;
-				break;
-			}
-			else{
-				temp=temp->next;
-			}
-		}
-		cout << nodeValue <<endl;  //print the value
-		return nodeValue;
-	}
-}
-
+//xReference xRefSingleList::getDataX(int x){
+//	if (head==NULL){
+//			cout << "ERROR" <<endl;
+//			//return false;
+//	}
+//	if (x >= len or x<0){
+//		cout << "Error"<< endl;
+//		return NULL;
+//	}else{
+//		Node *temp=head;
+//		string nodeValue;
+//		while(temp!=NULL){
+//			if (temp->posc == x){
+//				nodeValue = temp->value;
+//				break;
+//			}
+//			else{
+//				temp=temp->next;
+//			}
+//		}
+//		cout << nodeValue <<endl;  //print the value
+//		return nodeValue;
+//	}
+//}
