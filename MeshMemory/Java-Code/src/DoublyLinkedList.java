@@ -1,7 +1,5 @@
-package structures;
-
 /**
- * Class for doubly linked list, linear data structure for the game
+ * Class for doubly linked list, linear data structure
  * @author Randy
  *
  * @param <T>
@@ -98,6 +96,11 @@ public class DoublyLinkedList <T> {
 		//return list;
 	}
 	
+	/**
+	 * Returns the object in position i.
+	 * @param i
+	 * @return Object
+	 */
 	public Object getItem(int i) {
 		
 		if (head == tail) {
@@ -129,7 +132,6 @@ public class DoublyLinkedList <T> {
 	 */
 	public Object search(T pData){
 		DoublyNode<T> data = new DoublyNode<T>(pData);
-		boolean bool = false;
 	
 		if(isEmpty()){
 			return null;
@@ -147,6 +149,9 @@ public class DoublyLinkedList <T> {
 		}
 	}
 	
+	/**
+	 * Remove the first element of the list. 
+	 */
 	public void removeAtBeginning(){
 		
 		//List only has one element
@@ -161,7 +166,9 @@ public class DoublyLinkedList <T> {
 		head.setPrev(null);
 		}
 	}
-	
+	/**
+	 * Remove the last element of the list. 
+	 */
 	public void removeAtEnd() {
 		//List only has one element
 		if (head == tail) {
@@ -171,12 +178,6 @@ public class DoublyLinkedList <T> {
 			tail.setNext(null);			
 		}
 	}
-
-	/**
-	 * removeAtEnd()
-	 * insertInPosition(int position, tdata)
-	 * removeInPosition(int postion, tdata)
-	 */
 
 	/**
 	 * Return the search  element, else false.
@@ -202,6 +203,157 @@ public class DoublyLinkedList <T> {
 			System.out.println("Item not found");
 			return bool;
 		}
+	}
+	
+	//------------------------------------------------------------------------//
+	
+	/**
+	 * From a empty list, adds the type given on aa proportion given by the size, 
+	 * "keeping" the memory ready to use. 
+	 * 
+	 * @param size
+	 * @param type
+	 */
+	public void makeList(int size, String type){
+		if (type == "string"){
+			for(int i = 0; i < size; i++){
+				String emptyS = "PLanetas";
+				this.insertStrings(emptyS);
+			}
+		} else if(type == "int" ){
+			for(int i = 0; i < size; i++){
+				int emptyI = 4545;
+				this.insertInt(emptyI);
+			}
+			
+		} else if (type == "double"){
+			for(int i = 0; i < size; i++){
+				double emptyD = 0;
+				this.insertDouble(emptyD);
+			}
+			
+		}else if (type == "float"){
+			for(int i = 0; i < size; i++){
+				float emptyF = 0;
+				this.insertFloat(emptyF);
+			}
+			
+		}else if (type == "char"){
+			for(int i = 0; i < size; i++){
+				char emptyC = 0;
+				this.insertChar(emptyC);
+			}
+			
+		}
+		
+	}
+	
+	/**
+	 * Verifies is it is possible to add data to the list, 
+	 * removes the null from the list and inser the data, 
+	 * else send a message the list is full. 
+	 * @param tdata
+	 */
+	public void dataToList(T tdata){
+		if (this.getItem(0) == null){
+			this.removeAtBeginning();
+			this.insertAtEnd(tdata);
+		}else{
+			System.out.println("ERROR: the list is full");
+		}
+	}
+	
+	
+	/**
+	 * Insert a String (tData) at the end of the list.
+	 * 
+	 * @param tData
+	 */
+	public void insertStrings(String tData){
+		
+		DoublyNode<T> data = new DoublyNode<T>(tData);
+		
+		if(isEmpty()){
+			head = tail = data;
+		}else{
+			tail.setNext(data); //tail.next = data;
+			data.setPrev(tail); //data.prev = tail;
+		}
+		tail = data; //tail = head;
+	}
+	
+
+	/**
+	 * Insert a int (tData) at the end of the list.
+	 * 
+	 * @param tData
+	 */
+	public void insertInt(int tData){
+		
+		DoublyNode<T> data = new DoublyNode<T>(tData);
+		
+		if(isEmpty()){
+			head = tail = data;
+		}else{
+			tail.setNext(data); //tail.next = data;
+			data.setPrev(tail); //data.prev = tail;
+		}
+		tail = data; //tail = head;
+	}
+	
+
+	/**
+	 * Insert a Double (tData) at the end of the list.
+	 * 
+	 * @param tData
+	 */
+	public void insertDouble(double tData){
+		
+		DoublyNode<T> data = new DoublyNode<T>(tData);
+		
+		if(isEmpty()){
+			head = tail = data;
+		}else{
+			tail.setNext(data); //tail.next = data;
+			data.setPrev(tail); //data.prev = tail;
+		}
+		tail = data; //tail = head;
+	}
+	
+	/**
+	 * Insert a float (tData) at the end of the list.
+	 * 
+	 * @param tData
+	 */
+	public void insertFloat(float tData){
+		
+		DoublyNode<T> data = new DoublyNode<T>(tData);
+		
+		if(isEmpty()){
+			head = tail = data;
+		}else{
+			tail.setNext(data); //tail.next = data;
+			data.setPrev(tail); //data.prev = tail;
+		}
+		tail = data; //tail = head;
+	}
+	
+	/**
+	 * Insert a Char (tData) at the end of the list.
+	 * 
+	 * @param tData
+	 */
+	public void insertChar(char tData){
+		
+		DoublyNode<T> data = new DoublyNode<T>(tData);
+		
+		if(isEmpty()){
+			head = tail = data;
+		}else{
+			tail.setNext(data); //tail.next = data;
+			data.setPrev(tail); //data.prev = tail;
+		}
+		tail = data; //tail = head;
 	}
 
 }

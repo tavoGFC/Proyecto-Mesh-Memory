@@ -1,4 +1,3 @@
-package structures;
 /**
  * Class for the double nodes,
  * linear data structure.
@@ -14,6 +13,12 @@ public class DoublyNode<T> {
 	private DoublyNode<T> next; // basic node for next
 	private DoublyNode<T> prev;
 	private T data; 			//data/element to be inserted
+	private String dataS;
+	private int dataI;
+	private double dataD;
+	private float dataF;
+	private char dataC;
+	
 	
 	
 	/**
@@ -23,6 +28,51 @@ public class DoublyNode<T> {
 	 */
 	public DoublyNode (T data) {
 		this.data = data;
+	}
+	
+	/**
+	 * Construct an element (data) for the list.
+	 * 
+	 * @param data
+	 */
+	public DoublyNode (String data) {
+		this.dataS = data;
+	}
+	
+	/**
+	 * Construct an element (data) for the list.
+	 * 
+	 * @param data
+	 */
+	public DoublyNode (int data) {
+		this.dataI = data;
+	}
+	
+	/**
+	 * Construct an element (data) for the list.
+	 * 
+	 * @param data
+	 */
+	public DoublyNode (double data) {
+		this.dataD = data;
+	}
+	
+	/**
+	 * Construct an element (data) for the list.
+	 * 
+	 * @param data
+	 */
+	public DoublyNode (float data) {
+		this.dataF = data;
+	}
+	
+	/**
+	 * Construct an element (data) for the list.
+	 * 
+	 * @param data
+	 */
+	public DoublyNode (char data) {
+		this.dataC = data;
 	}
 	
 	/**
