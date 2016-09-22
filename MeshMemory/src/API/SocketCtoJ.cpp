@@ -12,7 +12,7 @@
  */
 SocketCtoJ::SocketCtoJ() {
 	MAXDATASIZE=1024;
-	this->descriptor = descriptor;
+	//this->descriptor = descriptor;
 }
 
 
@@ -101,7 +101,7 @@ int SocketCtoJ::receiveMsj(char* buffer, int longitudMensaje){
  * @params string mensaje
  */
 void SocketCtoJ::sendMsj(string mensaje){
-	mensaje+=" \n";
+	mensaje+="\n";
 	const char * mensajeChar = mensaje.c_str();
 	bzero(buffer, MAXDATASIZE);
 	strncpy(buffer, mensajeChar, sizeof(buffer));
@@ -110,11 +110,11 @@ void SocketCtoJ::sendMsj(string mensaje){
 	if (n < 0){
 		printf("Error write()\n");
 	}
-	bzero(buffer, MAXDATASIZE);
-	n = read(descriptor, buffer, MAXDATASIZE-1);
-	if (n < 0){
-		printf("error read()\n");
-	}
+//	bzero(buffer, MAXDATASIZE);
+//	n = read(descriptor, buffer, MAXDATASIZE-1);
+//	if (n < 0){
+//		printf("error read()\n");
+//	}
 }
 
 

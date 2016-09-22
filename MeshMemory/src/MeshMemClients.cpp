@@ -19,6 +19,13 @@ using namespace std;
 int main() {
 	MeshMemAPI myAPI;
 	SocketCtoJ mySocket=myAPI.getSocket();
+
+//	SocketCtoJ mySocket2=SocketCtoJ();
+//	mySocket2.startConnection("172.19.12.89",8080);
+//	mySocket2.sendMsj("heloowaawawwa");
+//	mySocket2.sendMsj("h22222");
+
+
 	int portN;
 	string hostIP;
 	xRefSingleList refList;
@@ -32,7 +39,7 @@ int main() {
 		cin >> hostIP;
 		cout << "Entry Port: "<<endl;
 		cin >> portN;
-		if (myAPI.getSocket().startConnection(hostIP, portN) != -1){
+		if (mySocket.startConnection(hostIP, portN) != -1){
 			cout <<"Successfully connected!"<<endl;
 			break;
 		}
@@ -77,8 +84,10 @@ int main() {
 			cin>>entryType;
 
 			if (myAPI.verifyType(entryType)){
-
+			//myAPI.getSocket().sendMsj("APIholiiiii");
 			xReference ref1 = myAPI.xMalloc(entrySize, entryType);
+			mySocket.sendMsj(entryType + "/" + ref1.NumberToString(entrySize));
+			//mySocket.sendMsj("API" + entryType );
 			refList.insertData(ref1);
 			refList.printList();
 			}
