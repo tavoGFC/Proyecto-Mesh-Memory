@@ -87,11 +87,13 @@ void xRefSingleList::printList() {
     	ss << temp->value.getSize();
     	string size= ss.str();
 
-    	string info=(temp->value.getID() + size + temp->value.getType()+ " -> ");
+    	string info=(" id: " + temp->value.getID() + "  size: " + size +"  type: " + temp->value.getType());
         //cout<<temp->value;		//print the value
         cout << " [";
+        cout << ("poscicion: ") ;	//print the position
         cout << (temp->posc) ;	//print the position
-        cout << "] -> " ;
+        cout <<info;
+        cout << "] -> " <<endl ;
 
         temp=temp->next;
     }
