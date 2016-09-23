@@ -5,39 +5,39 @@
  *      Author: randy
  */
 
-#include "Token.h"
 #include <iostream>
 #include <stdio.h>
+#include "Encripter.h"
 
 using namespace std;
-Token::Token() {
+Encripter::Encripter() {
 
 }
 
-Token::~Token() {
+Encripter::~Encripter() {
 }
 
-void Token::setString(string stringEncode){
-	toEncode = stringEncode;
+void Encripter::setString(string stringEncode){
+	this->toEncode = stringEncode;
 }
 
-string Token::getString(){
+string Encripter::getString(){
 	return toEncode;
 }
 
-string Token::encode(string s){
+string Encripter::encode(string s){
 	string stringEncoded;
 	stringEncoded = base64_encode(reinterpret_cast<const unsigned char*>(s.c_str()), s.length());
 	return stringEncoded;
 }
 
-string Token::decode(string stringEncoded){
+string Encripter::decode(string stringEncoded){
 	string stringDecoded;
 	stringDecoded = base64_decode(stringEncoded);
 	return stringDecoded;
 }
 
-string Token::base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
+string Encripter::base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
   string ret;
   int i = 0;
   int j = 0;
@@ -81,7 +81,7 @@ string Token::base64_encode(unsigned char const* bytes_to_encode, unsigned int i
 }
 
 
-string Token::base64_decode(string const& encoded_string) {
+string Encripter::base64_decode(string const& encoded_string) {
   int in_len = encoded_string.size();
   int i = 0;
   int j = 0;

@@ -12,6 +12,7 @@
 //#include "API/SocketCtoJ.h"
 #include "API/xReference.h"
 #include "Structures/xRefSingleList.h"
+#include "API/Encripter.h"
 
 
 using namespace std;
@@ -19,12 +20,7 @@ using namespace std;
 int main() {
 	MeshMemAPI myAPI;
 	SocketCtoJ mySocket=myAPI.getSocket();
-
-//	SocketCtoJ mySocket2=SocketCtoJ();
-//	mySocket2.startConnection("172.19.12.89",8080);
-//	mySocket2.sendMsj("heloowaawawwa");
-//	mySocket2.sendMsj("h22222");
-
+	Encripter crypto;
 
 	int portN;
 	string hostIP;
@@ -84,9 +80,13 @@ int main() {
 			cin>>entryType;
 
 			if (myAPI.verifyType(entryType)){
-			//myAPI.getSocket().sendMsj("APIholiiiii");
+
 			xReference ref1 = myAPI.xMalloc(entrySize, entryType);
-			mySocket.sendMsj(entryType + "/" + ref1.NumberToString(entrySize));
+
+			string msj= entryType + "/" + ref1.NumberToString(entrySize);
+
+			mySocket.sendMsj("API" + crypto.encode(msj));
+
 			//mySocket.sendMsj("API" + entryType );
 			refList.insertData(ref1);
 			refList.printList();
