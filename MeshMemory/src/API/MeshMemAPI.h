@@ -16,6 +16,8 @@ using namespace std;
 class MeshMemAPI{
 private:
 	SocketCtoJ mySocket;
+	bool isNumber(char c);
+
 public:
 	MeshMemAPI();
 	virtual ~MeshMemAPI();
@@ -26,6 +28,10 @@ public:
 	void xFree(xReference toFree);
 
 	bool verifyType(string type);
+	bool verifyInt(string str);
+	bool verifyFloat(string str);
+	bool verifyDouble(string str);
+	bool verifyChar(string str);
 
 };
 

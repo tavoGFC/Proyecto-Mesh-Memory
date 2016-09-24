@@ -21,7 +21,6 @@ int main() {
 	MeshMemAPI myAPI;
 	SocketCtoJ mySocket=myAPI.getSocket();
 	Encripter crypto;
-
 	int portN;
 	string hostIP;
 	xRefSingleList refList;
@@ -80,16 +79,16 @@ int main() {
 
 			if (myAPI.verifyType(entryString)){
 
-			xReference ref1 = myAPI.xMalloc(entryInt, entryString);
+				xReference ref1 = myAPI.xMalloc(entryInt, entryString);
 
-			string idenRef1 = ref1.getID(); //--------------------
+				string idenRef1 = ref1.getID(); //--------------------
 
-			string msj= entryString + "/" + ref1.NumberToString(entryInt);
+				string msj= entryString + "/" + ref1.NumberToString(entryInt) +"/" +  idenRef1;
 
-			mySocket.sendMsj("API" + crypto.encode(msj)); //API+type+size+ID
+				mySocket.sendMsj("API" + crypto.encode(msj)); //API+type+size+ID
 
-			refList.insertData(ref1);
-			refList.printList();
+				refList.insertData(ref1);
+				refList.printList();
 			}
 			else{
 				cout <<"ERROR, type is not in our parameters."<<endl;
@@ -115,16 +114,16 @@ int main() {
 
 			if (myAPI.verifyType(entryString)){
 
-			xReference ref1 = myAPI.xMalloc(entryInt, entryString);
+				xReference ref1 = myAPI.xMalloc(entryInt, entryString);
 
-			string idenRef1 = ref1.getID(); //--------------------
+				string idenRef1 = ref1.getID(); //--------------------
 
-			string msj= entryString + "/" + ref1.NumberToString(entryInt);
+				string msj= entryString + "/" + ref1.NumberToString(entryInt);
 
-			mySocket.sendMsj("API" + crypto.encode(msj)); //API+type+size+ID
+				mySocket.sendMsj("API" + crypto.encode(msj)); //API+type+size+ID
 
-			refList.insertData(ref1);
-			refList.printList();
+				refList.insertData(ref1);
+				refList.printList();
 			}
 			else{
 				cout <<"ERROR, type is not in our parameters."<<endl;
