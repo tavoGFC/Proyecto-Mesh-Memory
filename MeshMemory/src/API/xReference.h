@@ -21,6 +21,7 @@ using namespace std;
 class xReference {
 
 private:
+
 	string id;
 	int size;
 	string type;

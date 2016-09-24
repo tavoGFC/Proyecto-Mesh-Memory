@@ -21,8 +21,8 @@ public:
 	virtual ~MeshMemAPI();
 	SocketCtoJ getSocket();
 	xReference xMalloc(int size, string type);
-	xReference xMalloc(int size, string type, void* value);
-	void xAssign(xReference reference, void* value);
+	xReference xMalloc(int size, string type, string value);
+	void xAssign(xReference reference, string value);
 	void xFree(xReference toFree);
 
 	bool verifyType(string type);

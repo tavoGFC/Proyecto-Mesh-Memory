@@ -57,9 +57,8 @@ int main() {
 	cout << menu << endl;
 
 	string entryOption;
-
-	int entrySize;
-	string entryType;
+	int entryInt;
+	string entryString;
 
 	while(true){
 		cout << "Type your choice: " << endl;
@@ -75,19 +74,20 @@ int main() {
 			cout << "Please enter the parameters size (int) and type (xType)." << endl;
 
 			cout << "Entry Size: "<<endl;
-			cin>>entrySize;
+			cin>>entryInt;
 			cout << "Entry type: "<<endl;
-			cin>>entryType;
+			cin>>entryString;
 
-			if (myAPI.verifyType(entryType)){
+			if (myAPI.verifyType(entryString)){
 
-			xReference ref1 = myAPI.xMalloc(entrySize, entryType);
+			xReference ref1 = myAPI.xMalloc(entryInt, entryString);
 
-			string msj= entryType + "/" + ref1.NumberToString(entrySize);
+			string idenRef1 = ref1.getID(); //--------------------
 
-			mySocket.sendMsj("API" + crypto.encode(msj));
+			string msj= entryString + "/" + ref1.NumberToString(entryInt);
 
-			//mySocket.sendMsj("API" + entryType );
+			mySocket.sendMsj("API" + crypto.encode(msj)); //API+type+size+ID
+
 			refList.insertData(ref1);
 			refList.printList();
 			}
@@ -95,38 +95,87 @@ int main() {
 				cout <<"ERROR, type is not in our parameters."<<endl;
 			}
 
-//			int aux;
-//			int longitud;
-//			socket.receiveMsj((char*) &aux, sizeof(int));
-//			longitud = ntohl(aux);
-//			socket.receiveMsj(socket.buffer,longitud);
-//
-//			printf("Message of the MeshMem Manager: %s\n", socket.buffer);
-
 			cout << "Try another number if want to make another action." << endl;
 
 		}
-		//----------------------------------------xMALLOC------------------------------------
+		//----------------------------------------xMALLOC  (2)------------------------------------
 		else if(entryOption == "2"){
-			cout << "You have enter option (2): xMalloc(int size, xType type, void* value)." << endl;
-			cout << "Please enter the parameters size (int), type (xType) and value (void*)." << endl;
+			cout << "You have enter option (2): xMalloc(int size, String type, String value)." << endl;
+			cout << "Please enter the parameters size (int), type (string) and value (any primitive value)." << endl;
 			cout << "Entry: "<<endl;
 
+			cout << "Entry Size: "<<endl;
+			cin>>entryInt;
+			cout << "Entry type: "<<endl;
+			cin>>entryString;
+
+			string Value;
+			cout << "Entry value: "<<endl;
+			cin>>Value;
+
+			if (myAPI.verifyType(entryString)){
+
+			xReference ref1 = myAPI.xMalloc(entryInt, entryString);
+
+			string idenRef1 = ref1.getID(); //--------------------
+
+			string msj= entryString + "/" + ref1.NumberToString(entryInt);
+
+			mySocket.sendMsj("API" + crypto.encode(msj)); //API+type+size+ID
+
+			refList.insertData(ref1);
+			refList.printList();
+			}
+			else{
+				cout <<"ERROR, type is not in our parameters."<<endl;
+			}
+
+			cout << "Try another number if want to make another action." << endl;
 		}
 		//----------------------------------------xASSIGN------------------------------------
 		else if(entryOption == "3" ){
 			cout << "You have enter option (3): xAssign(xReference reference, void* value) " << endl;
-			cout << "Please enter the parameters reference (int) and value (void*)." << endl;
+			cout << "These are the xRef available:" << endl;
+			refList.printList();
+			cout << "Please type the number of the xReference object that makes references to the memory block." << endl;
 
-			void* value;
+			xReference ref1;
+			cout << "Entry xReference Object: "<<endl;
+
+			cin >>entryInt;
+			ref1 = refList.getDataX(entryInt);
+
+			string iden = ref1.getID();
 
 			cout << "Entry value: "<<endl;
-			cin >> value;
+			cin>>entryString;
 
-			cout << value <<endl;
+			string msj= entryString + "/" + iden;
+
+			mySocket.sendMsj("API" + crypto.encode(iden)); //API+value+ID
+
+			cout << "Try another number if want to make another action." << endl;
+
 		}
 		//----------------------------------------xFREE------------------------------------
 		else if(entryOption == "4" ){
+			cout << "You have enter option (4): xFree(xReference reference) " << endl;
+			cout << "These are the xRef available:" << endl;
+			refList.printList();
+			cout << "Please type the number of the xReference object that refers to the memory block that you want to free." << endl;
+
+			xReference ref1;
+			cout << "Entry xReference Object: "<<endl;
+
+			cin >> entryInt;
+
+			string iden = ref1.getID();
+
+			string msj= iden;
+
+			mySocket.sendMsj("API" + crypto.encode(iden)); //API+ID
+
+			cout << "Try another number if want to make another action." << endl;
 
 		}
 

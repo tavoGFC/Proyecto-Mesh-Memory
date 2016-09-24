@@ -22,7 +22,7 @@ public:
 	void insertData(xReference addData);
 	void deleteData(xReference delData);
 	void printList();
-	//xReference getDataX(int x);
+	xReference getDataX(int x);
 private:
 	struct Node{
 		xReference value;

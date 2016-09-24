@@ -44,14 +44,16 @@ SocketCtoJ MeshMemAPI::getSocket(){
 
 xReference MeshMemAPI::xMalloc(int size, string type){
 	xReference ref=xReference(size, type);
-//	mySocket.sendMsj("API" + type + "/" + ref.NumberToString(size));
 	return ref;
 
 }
-xReference MeshMemAPI::xMalloc(int size, string type, void* value){
+xReference MeshMemAPI::xMalloc(int size, string type, string value){
+	xReference ref=xReference(size, type);
+	return ref;
+
 
 }
-void MeshMemAPI::xAssign(xReference reference, void* value){
+void MeshMemAPI::xAssign(xReference reference, string value){
 
 }
 void MeshMemAPI::xFree(xReference toFree){

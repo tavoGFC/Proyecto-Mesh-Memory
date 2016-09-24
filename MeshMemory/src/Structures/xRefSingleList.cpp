@@ -100,27 +100,17 @@ void xRefSingleList::printList() {
     cout<<endl;
 }
 
-//xReference xRefSingleList::getDataX(int x){
-//	if (head==NULL){
-//			cout << "ERROR" <<endl;
-//			//return false;
-//	}
-//	if (x >= len or x<0){
-//		cout << "Error"<< endl;
-//		return NULL;
-//	}else{
-//		Node *temp=head;
-//		string nodeValue;
-//		while(temp!=NULL){
-//			if (temp->posc == x){
-//				nodeValue = temp->value;
-//				break;
-//			}
-//			else{
-//				temp=temp->next;
-//			}
-//		}
-//		cout << nodeValue <<endl;  //print the value
-//		return nodeValue;
-//	}
-//}
+xReference xRefSingleList::getDataX(int x){
+	Node *temp=head;
+	xReference nodeValue;
+	while(temp!=NULL){
+		if (temp->posc == x){
+			nodeValue = temp->value;
+			break;
+		}
+		else{
+			temp=temp->next;
+		}
+	}
+	return nodeValue;
+}
