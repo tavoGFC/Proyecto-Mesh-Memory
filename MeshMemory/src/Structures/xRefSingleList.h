@@ -15,6 +15,12 @@
 
 using namespace std;
 
+/**
+ * Doubly Linked List template model for handeling the xReferences
+ * objects in a list. All implementations work only and exactly for
+ * xReferences objects variables.
+ *
+ */
 class xRefSingleList {
 public:
 	xRefSingleList();

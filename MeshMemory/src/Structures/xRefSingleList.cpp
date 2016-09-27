@@ -8,15 +8,28 @@
 #include "xRefSingleList.h"
 
 
+/**
+ * Constructor
+ */
 xRefSingleList::xRefSingleList() {
 	len=0;
 	head=NULL;
 
 }
 
+/**
+ * Destroyer
+ */
 xRefSingleList::~xRefSingleList() {
 }
 
+
+/**
+ * Insert a new node in list with as a
+ * newValue object (xReference).
+ *
+ * @params newValue xReference
+ */
 void xRefSingleList::insertData(xReference newValue) {	//adds a new node with the given value
 	Node* newNode= new Node();
 	newNode->value=newValue;
@@ -37,6 +50,12 @@ void xRefSingleList::insertData(xReference newValue) {	//adds a new node with th
 	}
 }
 
+/**
+ * Deletes the first node as a nodeValue object
+ * (xReference) in the list.
+ *
+ * @params nodeValue xReference
+ */
 void xRefSingleList::deleteData(xReference nodeValue){	//deletes the first node that is found with the given value
 	if (head==NULL){	//first case: Empty list
 		cout << "ERROR"<<endl;
@@ -79,6 +98,9 @@ void xRefSingleList::deleteData(xReference nodeValue){	//deletes the first node 
 
 }
 
+/**
+ * Print the list.
+ */
 void xRefSingleList::printList() {
     Node *temp = head;
     while(temp!=NULL){
@@ -99,6 +121,12 @@ void xRefSingleList::printList() {
     cout<<endl;
 }
 
+/**
+ * Return an xReference object from the list,
+ * from the position insert in the parameter.
+ *
+ * @params x int
+ */
 xReference xRefSingleList::getDataX(int x){
 	Node *temp=head;
 	xReference nodeValue;
