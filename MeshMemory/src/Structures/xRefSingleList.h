@@ -23,6 +23,7 @@ public:
 	void deleteData(xReference delData);
 	void printList();
 	xReference getDataX(int x);
+
 private:
 	struct Node{
 		xReference value;

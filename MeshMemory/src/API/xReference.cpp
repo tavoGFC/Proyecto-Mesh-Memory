@@ -31,13 +31,15 @@ xReference::xReference(int size, string type) {
 
 
 /**
- * Destructor for an xReference object.
+ * Destroyer for an xReference object.
  */
 xReference::~xReference() {
 }
 
 /**
  * Returns the id for an xReference object.
+ *
+ * @return id
  */
 string xReference::getID(){
 	return id;
@@ -45,6 +47,8 @@ string xReference::getID(){
 
 /**
  * Returns the type for an xReference object.
+ *
+ * @return type
  */
 string xReference::getType(){
 	return type;
@@ -53,7 +57,7 @@ string xReference::getType(){
 /**
  * Returns the size for an xReference object.
  *
- * @param int size
+ * @param size
  */
 void xReference::setSize(int size){
 	this->size = size;
@@ -61,15 +65,43 @@ void xReference::setSize(int size){
 
 /**
  * Returns the size for an xReference object.
+ *
+ * @return size
  */
 int xReference::getSize(){
 	return size;
 }
 
 /**
+ * Set the data to save as a string. Merely representation.
+ */
+void xReference::setData(string data){
+	this->data = data;
+}
+
+/**
+ * Returns the data form the xReference obj as a string. Merely representation.
+ *
+ * @return data
+ */
+string xReference::getData(){
+	return data;
+}
+
+/**
+ * Free the data from a xRefenrence obj. Set the data to NULL.
+ */
+void xReference::freeData(){
+	string null = "";
+	this->data =(null);
+}
+
+
+/**
  * Compares two xReference, if equal returns true, else false.
  *
  * @param xReference xRef2
+ * @return bool
  */
 bool xReference::operator ==(xReference xRef2){
 	bool boolResult;
@@ -86,6 +118,7 @@ bool xReference::operator ==(xReference xRef2){
  * Compares two xReference, if not equal returns true, else false.
  *
  * @param xReference xRef2
+ * @return bool
  */
 bool xReference::operator !=(xReference xRef2){
 	bool boolResult;
@@ -97,10 +130,27 @@ bool xReference::operator !=(xReference xRef2){
 	return boolResult;
 }
 
+
+
+void xReference::operator =(xReference xRef2){
+	this = xRef2;
+	xRef2.~xReference();
+}
+
+
+/**
+ * Overset the value of this data to a NULL.
+ */
+void xReference::operator =(string null){
+	this->data=null;
+}
+
+
 /**
  * Converts an number (int) into a string.
  *
  * @param <T> number
+ * @return bool
  */
 template <typename T>
 string xReference::NumberToString ( T Number ){
@@ -111,6 +161,8 @@ string xReference::NumberToString ( T Number ){
 
 /**
  * Creates an ID for an xReference object.
+ *
+ * @return id
  */
 string xReference::generateID(){
 	string id, ID;
@@ -126,6 +178,8 @@ string xReference::generateID(){
 
 /**
  * Auxiliar function to generateID().
+ *
+ * @return id
  */
 string xReference::generateID_Aux(unsigned char const* bytes_to_encode, unsigned int in_len) {
 	  string ret;

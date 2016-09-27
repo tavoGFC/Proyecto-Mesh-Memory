@@ -15,7 +15,6 @@ xRefSingleList::xRefSingleList() {
 }
 
 xRefSingleList::~xRefSingleList() {
-	// TODO Auto-generated destructor stub
 }
 
 void xRefSingleList::insertData(xReference newValue) {	//adds a new node with the given value

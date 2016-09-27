@@ -18,17 +18,33 @@
 using namespace std;
 
 int main() {
-	MeshMemAPI myAPI;
-	SocketCtoJ mySocket=myAPI.getSocket();
-	Encripter crypto;
-	int portN;
-	string hostIP;
-	xRefSingleList refList;
+	MeshMemAPI myAPI; /*Instantiating an API */
+	SocketCtoJ mySocket=myAPI.getSocket(); /* Socket from API*/
+	Encripter crypto;/*Instantiating an Encripter for encoding in Base_64*/
+	int portN; /*Number (int) of the port of the Java-Server*/
+	string hostIP; /*Number (string) of the Java-Server*/
+	xRefSingleList refList; /*Instantiating an xRefSingleList (Double Linked List)*/
 
-	cout << "Welcome to the Mesh Memory!" << endl;
-	cout << "To access the API please connect to a MeshMemory Manager.";
-	cout << "Enter a valid IP address and the Port Number of the device to make a connection."<<endl;
+	/*Welcome (string)*/
+	string welcome =   "Welcome to the Mesh Memory!"
+					   "To access the API please connect to a MeshMemory Manager."
+					   "Enter a valid IP address and the Port Number of the device to make a connection.";
+	/*menu (string)*/
+	string menu =  	   "===============================================================================\n"
+					   "These are the functions to use in this menu.\n"
+					   "________________________________________________________________________________\n"
 
+					   "To use these functions type the number of the function you want to use.\n"
+				       "(0). To EXIT.\n"
+					   "(1). xMalloc(int size, xType type)\n"
+					   "(2). xMalloc(int size, xType type, void* value)\n"
+					   "(3). xAssign(xReference reference, void* value)\n"
+		               "(4). xFree(xReference toFree)\n"
+		               "===============================================================================\n";
+
+	cout << welcome << endl; //printing welcome
+
+	/*Loop for connecting this C-Client with the Java-Server*/
 	while(true){
 		cout << "Entry Host: "<<endl;
 		cin >> hostIP;
@@ -41,24 +57,14 @@ int main() {
 		cout<<"ERROR: please try connecting again!!"<<endl;
 	}
 
+	cout << menu << endl; //printing the menu
 
-	string menu =  "===============================================================================\n"
-				   "These are the functions to use in this menu.\n"
-				   "________________________________________________________________________________\n"
+	string entryOption; //entry (string) for choosing an action
+	int entryInt; //entry (int) for int  parameters in the action
+	string entryString; //entry (string) for  parameters in the action
+	string entryValue; //entry (string) for the parameters in the action
 
-				   "To use these functions type the number of the function you want to use.\n"
-			       "(0). To EXIT.\n"
-				   "(1). xMalloc(int size, xType type)\n"
-				   "(2). xMalloc(int size, xType type, void* value)\n"
-				   "(3). xAssign(xReference reference, void* value)\n"
-	               "(4). xFree(xReference toFree)\n"
-	               "===============================================================================\n";
-	cout << menu << endl;
-
-	string entryOption;
-	int entryInt;
-	string entryString;
-
+	/*Loop for the User to interact with the MeshMemAPI*/
 	while(true){
 		cout << "Type your choice: " << endl;
 		cin >> entryOption;
@@ -67,10 +73,10 @@ int main() {
 			cout << "Exit." << endl;
 			break;
 		}
-		//----------------------------------------xMALLOC------------------------------------
+		/*----------------------------------------xMALLOC------------------------------------*/
 		else if(entryOption == "1"){
 			cout << "You have enter option (1): xMalloc(int size, string type)." << endl;
-			cout << "Please enter the parameters size (int) and type (xType)." << endl;
+			cout << "Please enter the parameters size (int) and type (as a string)." << endl;
 
 			cout << "Entry Size: "<<endl;
 			cin>>entryInt;
@@ -79,15 +85,22 @@ int main() {
 
 			if (myAPI.verifyType(entryString)){
 
+				/*xMalloc returns an ref1 (xReference)*/
 				xReference ref1 = myAPI.xMalloc(entryInt, entryString);
 
-				string idenRef1 = ref1.getID(); //--------------------
+				/*Setting a unique ID for this ref1*/
+				string idenRef1 = ref1.getID();
 
-				string msj= entryString + "/" + ref1.NumberToString(entryInt) +"/" +  idenRef1;
+				/*Concatenate all data in msj (string): "API/xMalloc1/ identifies which action is being sent*/
+				string msj= "API/xMalloc1/" + entryString + "/" + ref1.NumberToString(entryInt) +"/" +  idenRef1;
 
-				mySocket.sendMsj("API" + crypto.encode(msj)); //API+type+size+ID
+				/*Send the msj (string) to the Java-Server Encripted in Base_64*/
+				mySocket.sendMsj(crypto.encode(msj));
 
+				/*Insert the ref1 (xReference) to a reList (xRefSingleList)*/
 				refList.insertData(ref1);
+
+				/*Prints the refList (xRefSingleList) on screen to show all xReferences object created*/
 				refList.printList();
 			}
 			else{
@@ -97,7 +110,7 @@ int main() {
 			cout << "Try another number if want to make another action." << endl;
 
 		}
-		//----------------------------------------xMALLOC  (2)------------------------------------
+		/*----------------------------------------xMALLOC  (2)--------------------------------*/
 		else if(entryOption == "2"){
 			cout << "You have enter option (2): xMalloc(int size, String type, String value)." << endl;
 			cout << "Please enter the parameters size (int), type (string) and value (any primitive value)." << endl;
@@ -108,21 +121,27 @@ int main() {
 			cout << "Entry type: "<<endl;
 			cin>>entryString;
 
-			string Value;
 			cout << "Entry value: "<<endl;
-			cin>>Value;
+			cin>> entryValue;
 
 			if (myAPI.verifyType(entryString)){
 
-				xReference ref1 = myAPI.xMalloc(entryInt, entryString);
+				/*xMalloc returns an ref1 (xReference)*/
+				xReference ref1 = myAPI.xMalloc(entryInt, entryString, entryValue);
 
-				string idenRef1 = ref1.getID(); //--------------------
+				/*Setting a unique ID for this ref1*/
+				string idenRef1 = ref1.getID();
 
-				string msj= entryString + "/" + ref1.NumberToString(entryInt);
+				/*Concatenate all data in msj (string): "API/xMalloc2/ identifies which action is being sent*/
+				string msj= "API/xMalloc2/" + entryString + "/" + ref1.NumberToString(entryInt) + "/" + entryValue +"/" +  idenRef1;
 
-				mySocket.sendMsj("API" + crypto.encode(msj)); //API+type+size+ID
+				/*Send the msj (string) to the Java-Server Encripted in Base_64*/
+				mySocket.sendMsj(crypto.encode(msj)); //API+type+size+ID
 
+				/*Insert the ref1 (xReference) to a reList (xRefSingleList)*/
 				refList.insertData(ref1);
+
+				/*Prints the refList (xRefSingleList) on screen to show all xReferences object created*/
 				refList.printList();
 			}
 			else{
@@ -131,32 +150,46 @@ int main() {
 
 			cout << "Try another number if want to make another action." << endl;
 		}
-		//----------------------------------------xASSIGN------------------------------------
+		/*----------------------------------------xASSIGN------------------------------------*/
 		else if(entryOption == "3" ){
-			cout << "You have enter option (3): xAssign(xReference reference, void* value) " << endl;
-			cout << "These are the xRef available:" << endl;
-			refList.printList();
+			cout << "You have enter option (3): xAssign(xReference reference, string value) " << endl;
 			cout << "Please type the number of the xReference object that makes references to the memory block." << endl;
 
-			xReference ref1;
+			cout << "These are the xRef available:" << endl;
+			refList.printList();
+
+			/*Instantiate an xReference: xref3 */
+			xReference ref3;
+
 			cout << "Entry xReference Object: "<<endl;
-
 			cin >>entryInt;
-			ref1 = refList.getDataX(entryInt);
 
-			string iden = ref1.getID();
+			/*Make xref3 equal as the one on the refList position */
+			ref3 = refList.getDataX(entryInt);
 
+			/*Setting a unique ID for this ref3*/
+			string idenRef3 = ref3.getID();
+
+			/*Entry the value of the data to save*/
 			cout << "Entry value: "<<endl;
 			cin>>entryString;
 
-			string msj= entryString + "/" + iden;
 
-			mySocket.sendMsj("API" + crypto.encode(iden)); //API+value+ID
+			if (myAPI.verifyType(entryString)){
+
+				myAPI.xAssign(ref3,entryString);
+
+				string msj= "API/xAssign/" + entryString + "/" + idenRef3;
+
+				mySocket.sendMsj(crypto.encode(msj));
+
+			}
+
 
 			cout << "Try another number if want to make another action." << endl;
 
 		}
-		//----------------------------------------xFREE------------------------------------
+		/*----------------------------------------xFREE------------------------------------*/
 		else if(entryOption == "4" ){
 			cout << "You have enter option (4): xFree(xReference reference) " << endl;
 			cout << "These are the xRef available:" << endl;
@@ -178,7 +211,7 @@ int main() {
 
 		}
 
-		//----------------------------------------ERROR------------------------------------
+		/*----------------------------------------ERROR------------------------------------*/
 		else{
 			cout << "Your entry does not match our functions.";
 		}
