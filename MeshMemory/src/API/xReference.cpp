@@ -133,7 +133,9 @@ bool xReference::operator !=(xReference xRef2){
 
 
 void xReference::operator =(xReference xRef2){
-	this = xRef2;
+	xReference *ptrThis = &this;
+	xReference *ptrxRef2 = &xRef2;
+	*ptrThis = *xRef2;
 	xRef2.~xReference();
 }
 

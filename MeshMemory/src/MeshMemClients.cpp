@@ -167,7 +167,7 @@ int main() {
 			/*Make xref3 equal as the one on the refList position */
 			ref3 = refList.getDataX(entryInt);
 
-			/*Setting a unique ID for this ref3*/
+			/*Setting a unique ID for this ref3 (xReference) */
 			string idenRef3 = ref3.getID();
 
 			/*Entry the value of the data to save*/
@@ -177,10 +177,13 @@ int main() {
 
 			if (myAPI.verifyType(entryString)){
 
+				/*Invoke the xAssing Method*/
 				myAPI.xAssign(ref3,entryString);
 
+				/*Concatenate all data in msj (string): "API/xAssign/ identifies which action is being sent*/
 				string msj= "API/xAssign/" + entryString + "/" + idenRef3;
 
+				/*Send the msj (string) to the Java-Server Encripted in Base_64*/
 				mySocket.sendMsj(crypto.encode(msj));
 
 			}
@@ -192,19 +195,27 @@ int main() {
 		/*----------------------------------------xFREE------------------------------------*/
 		else if(entryOption == "4" ){
 			cout << "You have enter option (4): xFree(xReference reference) " << endl;
-			cout << "These are the xRef available:" << endl;
-			refList.printList();
 			cout << "Please type the number of the xReference object that refers to the memory block that you want to free." << endl;
 
-			xReference ref1;
-			cout << "Entry xReference Object: "<<endl;
+			cout << "These are the xRef available:" << endl;
+			refList.printList();
 
+			/*Instantiate an xReference: xref4 */
+			xReference ref4;
+
+			cout << "Entry xReference Object: "<<endl;
 			cin >> entryInt;
 
-			string iden = ref1.getID();
+			/*Make xref4 equal as the one on the refList position */
+			ref4 = refList.getDataX(entryInt);
 
-			string msj= iden;
+			/*Setting a unique ID for this ref4 (xReference) */
+			string iden = ref4.getID();
 
+			/*Concatenate all data in msj (string): "API/xFree/ identifies which action is being sent*/
+			string msj= "API/xFree/" + iden;
+
+			/*Send the msj (string) to the Java-Server Encripted in Base_64*/
 			mySocket.sendMsj("API" + crypto.encode(iden)); //API+ID
 
 			cout << "Try another number if want to make another action." << endl;
