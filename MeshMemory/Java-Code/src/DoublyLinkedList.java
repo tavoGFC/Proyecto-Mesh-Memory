@@ -9,7 +9,27 @@ public class DoublyLinkedList <T> {
 	
 	private DoublyNode<T> head = null; //null node for the head of the list
 	private DoublyNode<T> tail = null; //null node for the tail of the list
+	private String id;
 	
+	
+	/**
+	 * Set the id of the list (DoublyLinkedList).
+	 * 
+	 * @param String id
+	 */
+	
+	public void setID(String id){
+		this.id = id;
+	}
+	
+	/**
+	 * Retur the id of the list (DoublyLinked List).
+	 * 
+	 * @return id
+	 */
+	public String getID(){
+		return id;
+	}
 	
 	/**
 	 * Return the length of the list.
@@ -18,8 +38,7 @@ public class DoublyLinkedList <T> {
 	 */
 	public int getLength() {
 		int counter = 0; 
-		DoublyNode tmp = head;
-		
+		DoublyNode<T> tmp = head;
 		while (tmp != null) {
 			counter++;
 			tmp = tmp.getNext();
@@ -33,12 +52,8 @@ public class DoublyLinkedList <T> {
 	 * @return boolean 
 	 */
 	public boolean isEmpty(){
-		if (head == null){  //optional: getLength() == 0
-			return true;
-		}else{
-			return false;
-			}
-		}
+		return (head == null);
+	}
 	
 	/**
 	 * Insert an element (tData) at the beginning of the list.
@@ -82,22 +97,22 @@ public class DoublyLinkedList <T> {
 	 * 
 	 * @return list 
 	 */
-	public void print(){	
-		
+	public void print(){
+
 		StringBuilder list = new StringBuilder();
 		DoublyNode<T> tmp = head;
 		
 		while(tmp != null){
-			//System.out.println(list);
 			list.append(tmp.getData() + ",");
 			tmp = tmp.getNext();
 		}
 		System.out.println(list);
-		//return list;
+		
 	}
 	
 	/**
 	 * Returns the object in position i.
+	 * 
 	 * @param i
 	 * @return Object
 	 */
@@ -105,11 +120,8 @@ public class DoublyLinkedList <T> {
 		
 		if (head == tail) {
 			return head.getData();
-		}
-		
-		else  {
-		
-			DoublyNode temp = head;
+		}else {
+			DoublyNode<T> temp = head;
 			if (temp != null) {
 				for (int j = 0; j != i; j++) {
 					
@@ -131,12 +143,10 @@ public class DoublyLinkedList <T> {
 	 * @return pData
 	 */
 	public Object search(T pData){
-		DoublyNode<T> data = new DoublyNode<T>(pData);
-	
 		if(isEmpty()){
 			return null;
 		}else{
-			DoublyNode tmp = head; 
+			DoublyNode<T> tmp = head; 
 			while(tmp != null){
 				if(tmp.getData() == pData){
 					return tmp;
@@ -185,13 +195,11 @@ public class DoublyLinkedList <T> {
 	 * @return pData
 	 */
 	public boolean contains(String pData){
-		DoublyNode<T> data = new DoublyNode<T>((T) pData);
 		boolean bool = false;
-	
 		if(isEmpty()){
 			return false;
 		}else{
-			DoublyNode tmp = head; 
+			DoublyNode<T> tmp = head; 
 			while(tmp != null){
 				if(tmp.getData().equals(pData)){
 					bool = true;
@@ -217,12 +225,12 @@ public class DoublyLinkedList <T> {
 	public void makeList(int size, String type){
 		if (type == "string"){
 			for(int i = 0; i < size; i++){
-				String emptyS = "PLanetas";
+				String emptyS = "";
 				this.insertStrings(emptyS);
 			}
 		} else if(type == "int" ){
 			for(int i = 0; i < size; i++){
-				int emptyI = 4545;
+				int emptyI = 0;
 				this.insertInt(emptyI);
 			}
 			
@@ -255,9 +263,10 @@ public class DoublyLinkedList <T> {
 	 * @param tdata
 	 */
 	public void dataToList(T tdata){
-		if (this.getItem(0) == null){
-			this.removeAtBeginning();
-			this.insertAtEnd(tdata);
+		int len = this.getLength() -1 ;
+		if (this.getItem(len) == null){
+			this.removeAtEnd();
+			this.insertAtBeginning(tdata);
 		}else{
 			System.out.println("ERROR: the list is full");
 		}
@@ -356,4 +365,24 @@ public class DoublyLinkedList <T> {
 		tail = data; //tail = head;
 	}
 
+	
+	
+	/**
+	 * Insert a list (DoublyLinkedList) at the end of the list.
+	 * 
+	 * @param tData
+	 */
+	public void insertList(DoublyLinkedList<T> doubly){
+		
+		DoublyNode<T> list = new DoublyNode<T>(doubly);
+		
+		if(isEmpty()){
+			head = tail = list;
+		}else{
+			tail.setNext(list); //tail.next = data;
+			list.setPrev(tail); //data.prev = tail;
+		}
+		tail = list; //tail = head;
+	}
+	
 }

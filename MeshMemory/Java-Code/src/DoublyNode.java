@@ -18,6 +18,7 @@ public class DoublyNode<T> {
 	private double dataD;
 	private float dataF;
 	private char dataC;
+	private DoublyLinkedList<T> list;
 	
 	
 	
@@ -75,6 +76,16 @@ public class DoublyNode<T> {
 		this.dataC = data;
 	}
 	
+	
+	/**
+	 * Construct an element (data) for the list.
+	 * 
+	 * @param data
+	 */
+	public DoublyNode(DoublyLinkedList<T> list) {
+		this.list = list;
+	}
+
 	/**
 	 * Set the next node in the list. 
 	 * 
