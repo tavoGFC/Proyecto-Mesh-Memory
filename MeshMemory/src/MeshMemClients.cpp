@@ -189,6 +189,7 @@ int main() {
 
 
 			cout << "Try another number if want to make another action." << endl;
+			cout << "Try another number if want to make another action." << endl;
 
 		}
 		/*----------------------------------------xFREE------------------------------------*/
