@@ -53,7 +53,7 @@ xReference MeshMemAPI::xMalloc(int size, string type){
  */
 xReference MeshMemAPI::xMalloc(int size, string type, string value){
 	xReference ref=xReference(size, type);
-	ref.setData(value);
+	//ref.setData(value);
 	return ref;
 
 
@@ -62,14 +62,14 @@ xReference MeshMemAPI::xMalloc(int size, string type, string value){
  *Set the data of the reference to
  */
 void MeshMemAPI::xAssign(xReference reference, string value){
-	reference.setData(value);
+	//reference.setData(value);
 }
 
 /**
  *Set the value of data to an NULL into the toFree obj.
  */
 void MeshMemAPI::xFree(xReference toFree){
-	toFree.freeData();
+	//toFree.freeData();
 	cout<< "Free data.";
 }
 

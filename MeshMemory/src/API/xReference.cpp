@@ -74,27 +74,27 @@ int xReference::getSize(){
 
 /**
  * Set the data to save as a string. Merely representation.
- */
+ *
 void xReference::setData(string data){
 	this->data = data;
-}
+}*/
 
 /**
  * Returns the data form the xReference obj as a string. Merely representation.
  *
  * @return data
- */
+ *
 string xReference::getData(){
 	return data;
-}
+}*/
 
 /**
  * Free the data from a xRefenrence obj. Set the data to NULL.
- */
+ *
 void xReference::freeData(){
 	string null = "";
 	this->data =(null);
-}
+}*/
 
 
 /**
@@ -132,20 +132,18 @@ bool xReference::operator !=(xReference xRef2){
 
 
 
-void xReference::operator =(xReference xRef2){
-	xReference *ptrThis = &this;
-	xReference *ptrxRef2 = &xRef2;
-	*ptrThis = *xRef2;
-	xRef2.~xReference();
-}
+//void xReference::operator =(xReference xRef2){
+	//this = xRef2;
+	//xRef2.~xReference();
+//}
 
 
 /**
  * Overset the value of this data to a NULL.
  */
-void xReference::operator =(string null){
-	this->data=null;
-}
+//void xReference::operator =(string null){
+	//this->data=null;
+//}
 
 
 /**

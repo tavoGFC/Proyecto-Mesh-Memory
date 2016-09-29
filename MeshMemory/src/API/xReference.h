@@ -25,7 +25,7 @@ private:
 	string id;
 	int size;
 	string type;
-	string data = NULL;
+	//string data = NULL;
 
 public:
 	xReference();
@@ -36,15 +36,15 @@ public:
 	void setSize(int size);
 	int getSize();
 	string getType();
-	void setData(string data);
-	string getData();
-	void freeData();
+	//void setData(string data);
+	//string getData();
+	//void freeData();
 
 	xReference& operator *();
 	bool operator ==(xReference xRef2);
 	bool operator !=(xReference xRef2);
-	void operator = (xReference xRef2);
-	void operator =(string null);
+	//void operator = (xReference xRef2);
+	//void operator =(string null);
 
 	string generateID();
 	string generateID_Aux(unsigned char const* bytes_to_encode, unsigned int in_len);

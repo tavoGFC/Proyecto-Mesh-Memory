@@ -92,10 +92,10 @@ int main() {
 				string idenRef1 = ref1.getID();
 
 				/*Concatenate all data in msj (string): "API/xMalloc1/ identifies which action is being sent*/
-				string msj= "API/xMalloc1/" + entryString + "/" + ref1.NumberToString(entryInt) +"/" +  idenRef1;
+				string msj= "xMalloc1/"+ entryString + "/" + ref1.NumberToString(entryInt) +"/" +  idenRef1;
 
 				/*Send the msj (string) to the Java-Server Encripted in Base_64*/
-				mySocket.sendMsj(crypto.encode(msj));
+				mySocket.sendMsj("API/" + crypto.encode(msj)  + "\n");
 
 				/*Insert the ref1 (xReference) to a reList (xRefSingleList)*/
 				refList.insertData(ref1);
@@ -114,7 +114,6 @@ int main() {
 		else if(entryOption == "2"){
 			cout << "You have enter option (2): xMalloc(int size, String type, String value)." << endl;
 			cout << "Please enter the parameters size (int), type (string) and value (any primitive value)." << endl;
-			cout << "Entry: "<<endl;
 
 			cout << "Entry Size: "<<endl;
 			cin>>entryInt;
@@ -133,10 +132,10 @@ int main() {
 				string idenRef1 = ref1.getID();
 
 				/*Concatenate all data in msj (string): "API/xMalloc2/ identifies which action is being sent*/
-				string msj= "API/xMalloc2/" + entryString + "/" + ref1.NumberToString(entryInt) + "/" + entryValue +"/" +  idenRef1;
+				string msj= "xMalloc2/" + entryString + "/" + ref1.NumberToString(entryInt) + "/" + entryValue +"/" +  idenRef1;
 
 				/*Send the msj (string) to the Java-Server Encripted in Base_64*/
-				mySocket.sendMsj(crypto.encode(msj)); //API+type+size+ID
+				mySocket.sendMsj("API/" + crypto.encode(msj) + "\n"); //API+type+size+ID
 
 				/*Insert the ref1 (xReference) to a reList (xRefSingleList)*/
 				refList.insertData(ref1);
@@ -181,10 +180,10 @@ int main() {
 				myAPI.xAssign(ref3,entryString);
 
 				/*Concatenate all data in msj (string): "API/xAssign/ identifies which action is being sent*/
-				string msj= "API/xAssign/" + entryString + "/" + idenRef3;
+				string msj= "xAssign/" + entryString + "/" + idenRef3;
 
 				/*Send the msj (string) to the Java-Server Encripted in Base_64*/
-				mySocket.sendMsj(crypto.encode(msj));
+				mySocket.sendMsj("API/" + crypto.encode(msj) + "\n");
 
 			}
 
@@ -213,10 +212,10 @@ int main() {
 			string iden = ref4.getID();
 
 			/*Concatenate all data in msj (string): "API/xFree/ identifies which action is being sent*/
-			string msj= "API/xFree/" + iden;
+			string msj= "xFree/" + iden;
 
 			/*Send the msj (string) to the Java-Server Encripted in Base_64*/
-			mySocket.sendMsj("API" + crypto.encode(iden)); //API+ID
+			mySocket.sendMsj("API/" + crypto.encode(iden) + "\n");
 
 			cout << "Try another number if want to make another action." << endl;
 
