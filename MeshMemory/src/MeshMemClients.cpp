@@ -167,30 +167,21 @@ int main() {
 			ref3 = refList.getDataX(entryInt);
 
 			/*Setting a unique ID for this ref3 (xReference) */
-			string idenRef3 = ref3.getID();
+			string iden = ref3.getID();
 
 			/*Entry the value of the data to save*/
 			cout << "Entry value: "<<endl;
 			cin>>entryString;
 
+			myAPI.xAssign(ref3,entryString);
 
-			if (myAPI.verifyType(entryString)){
+			/*Concatenate all data in msj (string): "API/xAssign/ identifies which action is being sent*/
+			string msj= "xAssign/" + entryString + "/" + iden;
 
-				/*Invoke the xAssing Method*/
-				myAPI.xAssign(ref3,entryString);
-
-				/*Concatenate all data in msj (string): "API/xAssign/ identifies which action is being sent*/
-				string msj= "xAssign/" + entryString + "/" + idenRef3;
-
-				/*Send the msj (string) to the Java-Server Encripted in Base_64*/
-				mySocket.sendMsj("API/" + crypto.encode(msj) + "\n");
-
-			}
-
+			/*Send the msj (string) to the Java-Server Encripted in Base_64*/
+			mySocket.sendMsj("API/" + crypto.encode(msj) + "\n");
 
 			cout << "Try another number if want to make another action." << endl;
-			cout << "Try another number if want to make another action." << endl;
-
 		}
 		/*----------------------------------------xFREE------------------------------------*/
 		else if(entryOption == "4" ){
